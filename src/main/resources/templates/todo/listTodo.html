@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .done{
+            color: #ccc;
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="list-todo">
+        <div class="list-todo__title">Todo</div>
+        <div class="list-todo__header">
+            <form th:action = "@{/add-todo}" method="post">
+                <input  name="title" />
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+        <div class="list-todo__tassk">
+            <table >
+                <tr th:each="todo : ${list}">
+                    <td th:text="${todo.title}"></td>
+                    <td th:class="${todo.completed?'done':''}" th:text="${todo.title}"></td>
+                    <td ><a th:href="@{'/complete-todo?id='+${todo.id}}" 
+                        th:text="${todo.completed?'Inprogress':'Done'}">Done</a></td>
+                    <td><a th:href="@{'/delete-todo?id='+${todo.id}}">Delete</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
